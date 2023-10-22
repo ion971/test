@@ -1,5 +1,6 @@
 #!/bin/bash
 # line from develop1
+#line from devops junior
 
 echo "127.0.0.1 wordpress.test.net www.wordpress.test.net" >> /etc/hosts
 
