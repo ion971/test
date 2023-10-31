@@ -36,8 +36,11 @@ apt install -y nginx php php-fpm php-mysql php-curl php-gd mysql-server
 apt remove -y apache2
 
 
-# check php-fpm socket - check for avaliability (version for ubuntu 18)
-ls /run/php/php7.2-fpm.sock
+# check php-fpm socket - check for avaliability (version for ubuntu 18.04)
+#ls /run/php/php7.2-fpm.sock
+
+# check php-fpm socket - check for avaliability (version for ubuntu 22.04)
+ls /run/php/php8.1-fpm.sock
 
 
 # configure MySQL
@@ -67,7 +70,8 @@ server {
 
   location ~ \.php\$ {
     include snippets/fastcgi-php.conf;
-    fastcgi_pass unix:/run/php/php7.2-fpm.sock;
+    #fastcgi_pass unix:/run/php/php7.2-fpm.sock;
+    fastcgi_pass unix:/run/php/php8.1-fpm.sock;
   }
 }
 EOF
