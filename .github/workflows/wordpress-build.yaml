@@ -1,0 +1,21 @@
+name: Dekopay latest Wordpress in Ubuntu 18.04 LTS
+
+on:
+  workflow_dispatch:
+
+env:
+  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID_BUILD }}
+  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY_BUILD }}
+  
+jobs:
+  wordpress-build:
+    runs-on: ubuntu-18.04
+    continue-on-error: false
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Run Wordpress Bash script
+        run: |
+          /bin/bash ./wordpress.sh
+
+
