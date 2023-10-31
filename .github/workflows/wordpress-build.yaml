@@ -1,4 +1,4 @@
-name: Deploy latest Wordpress in Ubuntu 18.04 LTS
+name: Deploy latest Wordpress in Ubuntu latest
 
 on:
   workflow_dispatch:
@@ -14,6 +14,6 @@ jobs:
 
       - name: Run Wordpress Bash script
         run: |
-          /bin/bash ./wordpress.sh
+          sudo ./wordpress.sh
 
 
