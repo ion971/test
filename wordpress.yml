@@ -1,0 +1,46 @@
+---
+
+- name: wordpress.instalation
+  hosts: vagrant
+  become: yes
+  #environment:
+  vars: 
+    WP_DOMAIN: "wordpress.test.net"
+    WP_ADMIN_USERNAME: "admin"
+    WP_ADMIN_PASSWORD: "@admin123"
+    WP_ADMIN_EMAIL: "no@spam.org"
+    WP_DB_NAME: "wordpress"
+    WP_DB_USERNAME: "wordpress"
+    WP_PATH: "/var/www/wordpress"
+    WP_DB_PASSWORD: "OySbciJ3S8KvEYo07Jr09NXBqesIWKqzUVot53EFEOnHramzWo1wjhDJftb3NsYj"  
+    MYSQL_ROOT_PASSWORD: "SBPorLmM1a3UE60Kj9yStujbMTn2sITdZwkfx3ZJBW6rEXvd8K7RY0xNX3JkgTzh"  
+      
+  
+  tasks:
+    - name: Configure /etc/hosts
+      lineinfile:
+        dest: /etc/hosts
+        line: "127.0.0.1 {{ WP_DOMAIN }}"
+      
+    - name: Update Package Cache
+      apt:
+        update_cache: yes
+
+    - name: Install software
+      package:
+        name:
+          - nginx 
+          - php 
+          - php-fpm 
+          - php-mysql 
+          - php-curl 
+          - php-gd 
+        state: present
+
+    - name: Uninstall apache2
+      package:
+      name:
+        - apache2
+        state: absent
+
+        
