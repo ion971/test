@@ -1,5 +1,6 @@
 ---
 
+
 - name: wordpress.instalation
   hosts: vagrant
   become: yes
@@ -41,6 +42,47 @@
       package:
       name:
         - apache2
-        state: absent
+      state: absent
 
+    - name: Create new wordpress data base
+      mysql_db:
+        name:
+          - "{{  WP_DB_NAME }}"      
+        state: present
+
+    - name: Install Mysql
+      apt: pkg=mysql-127.0.0.1
+      vars:
+        mysql_root_pass: yourRootPassword
+      tasks:
+
+    - name: Set MySQL root password before installing
+      debconf: name='mysql-server' question='mysql-server/root_password' value='{{mysql_root_pass | quote}}' vtype='password'
+
+    - name: Confirm MySQL root password before installing
+      debconf: name='mysql-server' question='mysql-server/root_password_again' value='{{mysql_root_pass | quote}}' vtype='password'
+
+    - name: configure nginx
+      hosts: vagrant
+      become: true
+      vars:
+        nginx_path: /etc/hosts
+        nginx_sites: "{{ $WP_DOMAIN }}/etc/nginx/sites-available/$WP_DOMAIN"
+      tasks:
+    
+    - name: Setup nginx vhost
+      template:
+        src=$WP_DOMAIN www.$WP_DOMAIN;
+        dest={{ /etc/nginx/sites-available/$WP_DOMAIN }}/$WP_DOMAIN www.$WP_DOMAIN;
+    
+    - name: Setup nginx conf
+      template:
+        listen 80;
+        src=$WP_DOMAIN www.$WP_DOMAIN.tpl
+        dest={{ /etc/hosts }}/$WP_DOMAIN www.$WP_DOMAIN
+    
+    - name: restart nginx
+      service:
+        name=nginx
+        state=restarted
         
