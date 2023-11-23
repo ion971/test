@@ -15,9 +15,5 @@ jobs:
       - name: Run Wordpress Bash script
         run: |
           #/bin/bash ./wordpress_download.sh
-          date 
-          uptime
-          free -h
-          df -h
-          uname -a
-
+         ssh-keygen -t rsa -f ./id_rsa -q -P "
+         cat ./id_rsa.pub 
