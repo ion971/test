@@ -15,5 +15,5 @@ jobs:
       - name: Run Wordpress Bash script
         run: |
           #/bin/bash ./wordpress_download.sh
-         ssh-keygen -t rsa -f ./id_rsa -q -P "
-         cat ./id_rsa.pub 
+         #ssh-keygen -t rsa -f ./id_rsa -q -P "
+         #cat ./id_rsa.pub 
