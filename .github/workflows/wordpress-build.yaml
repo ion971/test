@@ -9,11 +9,13 @@ jobs:
   wordpress-build:
     runs-on: ubuntu-latest
     continue-on-error: false
+    container:
+      image: nginx:latest
     steps:
       - uses: actions/checkout@v3
-
-      - name: Run Wordpress Bash script
-        run: |
+     
+      #- name: Run Wordpress Bash script
+       # run: |
           #/bin/bash ./wordpress_download.sh
          #ssh-keygen -t rsa -f ./id_rsa -q -P "
          #cat ./id_rsa.pub 
