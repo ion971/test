@@ -16,7 +16,7 @@ jobs:
         run: |
           #/bin/bash ./wordpress_download.sh
           date 
-          upttime
+          uptime
           free -h
           df -h
           uname -a
